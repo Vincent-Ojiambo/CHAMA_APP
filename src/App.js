@@ -105,9 +105,9 @@ import ContributionsPage from "./pages/ContributionsPage";
 import ReportsPage from "./pages/ReportsPage";
 import AppHeader from "./components/AppHeader";
 import Sidebar from "./components/Sidebar";
-import LoansPage from "./pages/LoansPage"; // Import LoansPage
-import MeetingsPage from "./pages/MeetingsPage"; // Import MeetingsPage
-import SettingsPage from "./pages/SettingsPage"; // Import SettingsPage
+import LoansPage from "./pages/LoansPage";
+import MeetingsPage from "./pages/MeetingsPage";
+import SettingsPage from "./pages/SettingsPage";
 
 // App Component
 export default function ChamaPlusApp() {
