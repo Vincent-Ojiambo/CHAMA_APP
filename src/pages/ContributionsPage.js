@@ -31,123 +31,72 @@ function ContributionsPage() {
   ];
 
   return (
-    <div className="pt-20 px-6 ml-56">
-      <div className="mb-2">
-        <p className="text-sm">
-          <span className="text-gray-500">
-            My Chamas &gt; Mwanzo Chama &gt;{" "}
-          </span>
-          <span className="text-gray-800 font-medium">Contributions</span>
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">
-          Mwanzo Chama - Contributions
-        </h1>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <StatCard
-          icon={<Wallet />}
-          title="Total Contributions"
-          value="KSH 145,000"
-        />
-        <StatCard
-          icon={<User />}
-          title="Your Contributions"
-          value="KSH 12,000"
-        />
-        <StatCard
-          icon={<Calendar />}
-          title="Next Due Date"
-          value="May 15, 2025"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Contribution History */}
-        <div className="md:col-span-3">
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="p-6 pb-0">
-              <h2 className="text-lg font-semibold mb-4">
-                Contribution History
-              </h2>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="text-left py-3 px-6 text-xs font-medium text-gray-500 uppercase">
-                      Date
-                    </th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-gray-500 uppercase">
-                      Amount
-                    </th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-gray-500 uppercase">
-                      Method
-                    </th>
-                    <th className="text-left py-3 px-6 text-xs font-medium text-gray-500 uppercase">
-                      Status
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contributionHistory.map((item, index) => (
-                    <tr
-                      key={index}
-                      className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                    >
-                      <td className="py-3 px-6 text-sm">{item.date}</td>
-                      <td className="py-3 px-6 text-sm">{item.amount}</td>
-                      <td className="py-3 px-6 text-sm">{item.method}</td>
-                      <td className="py-3 px-6 text-sm text-green-600">
-                        {item.status}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-100 p-4 pt-20">
+      <div className="max-w-5xl mx-auto space-y-10">
+        {/* Header Section */}
+        <div className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 rounded-2xl shadow-lg p-8 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <div>
+              <p className="text-sm text-blue-50 mb-2">
+                My Chamas &gt; Mwanzo Chama &gt; <span className="font-bold text-white">Contributions</span>
+              </p>
+              <h1 className="text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">Mwanzo Chama - Contributions</h1>
             </div>
           </div>
         </div>
 
-        {/* Make Contribution Panel */}
-        <div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Make Contribution</h2>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-2xl shadow p-6 flex flex-col items-center text-center">
+            <div className="mb-2 p-3 rounded-full bg-gradient-to-tr from-green-300 via-blue-200 to-purple-200">
+              <Wallet className="text-green-700 text-2xl" />
+            </div>
+            <div className="font-semibold text-lg text-gray-800">Total Contributions</div>
+            <div className="text-2xl font-extrabold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mt-1">KSH 145,000</div>
+          </div>
+          <div className="bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-2xl shadow p-6 flex flex-col items-center text-center">
+            <div className="mb-2 p-3 rounded-full bg-gradient-to-tr from-green-300 via-blue-200 to-purple-200">
+              <User className="text-green-700 text-2xl" />
+            </div>
+            <div className="font-semibold text-lg text-gray-800">Your Contributions</div>
+            <div className="text-2xl font-extrabold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mt-1">KSH 12,000</div>
+          </div>
+          <div className="bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-2xl shadow p-6 flex flex-col items-center text-center">
+            <div className="mb-2 p-3 rounded-full bg-gradient-to-tr from-green-300 via-blue-200 to-purple-200">
+              <Calendar className="text-green-700 text-2xl" />
+            </div>
+            <div className="font-semibold text-lg text-gray-800">Next Due Date</div>
+            <div className="text-2xl font-extrabold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mt-1">May 15, 2025</div>
+          </div>
+        </div>
 
-            <form>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-medium mb-2">
-                  Amount (KSH)
-                </label>
-                <input
-                  type="number"
-                  className="shadow-sm border border-gray-300 rounded w-full py-2 px-3 text-gray-700"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-gray-700 text-sm font-medium mb-2">
-                  Payment Method
-                </label>
-                <select className="shadow-sm border border-gray-300 rounded w-full py-2 px-3 text-gray-700">
-                  <option>M-Pesa</option>
-                  <option>Bank Transfer</option>
-                  <option>Cash</option>
-                </select>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Pay Now
-              </button>
-            </form>
+        {/* Contribution History Table/Card */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <h2 className="text-xl font-bold mb-6 text-gray-800">Contribution History</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Amount</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Method</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {contributionHistory.map((contrib, idx) => (
+                  <tr key={idx} className="hover:bg-blue-50 transition-colors">
+                    <td className="px-4 py-3 text-gray-700 font-medium">{contrib.date}</td>
+                    <td className="px-4 py-3 text-blue-700 font-bold">{contrib.amount}</td>
+                    <td className="px-4 py-3 text-gray-600">{contrib.method}</td>
+                    <td className="px-4 py-3">
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold
+                        ${contrib.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>{contrib.status}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

@@ -21,57 +21,51 @@ function MeetingsPage() {
   ];
 
   return (
-    <div className="pt-20 px-6 ml-56">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Meetings</h1>
-        <p className="text-gray-600">Manage and view upcoming chama meetings</p>
-      </div>
-
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="p-6">
-          <h2 className="text-lg font-semibold mb-4">Upcoming Meetings</h2>
-          {upcomingMeetings.length === 0 ? (
-            <p className="text-gray-500">No upcoming meetings scheduled.</p>
-          ) : (
-            <ul className="space-y-4">
-              {upcomingMeetings.map((meeting) => (
-                <li key={meeting.id} className="border rounded-md p-4">
-                  <h3 className="font-semibold text-gray-800">
-                    {meeting.chama} Meeting
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Date: {meeting.date} | Time: {meeting.time}
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    Location: {meeting.location}
-                  </p>
-                  <div>
-                    <h4 className="font-semibold text-gray-700 mt-2 text-sm">
-                      Agenda:
-                    </h4>
-                    <ul className="list-disc list-inside text-gray-600 text-sm">
-                      {meeting.agenda.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-3">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm mr-2">
-                      View Details
-                    </button>
-                    <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-sm">
-                      Edit
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-100 p-4 pt-20">
+      <div className="max-w-4xl mx-auto space-y-10">
+        {/* Header Section */}
+        <div className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 rounded-2xl shadow-lg p-8 mb-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-lg">Meetings</h1>
+          <p className="text-lg text-blue-50">Manage and view upcoming chama meetings</p>
         </div>
-        <div className="bg-gray-50 p-6 border-t border-gray-200">
-          <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Schedule New Meeting
-          </button>
+
+        {/* Upcoming Meetings */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <h2 className="text-xl font-bold mb-6 text-gray-800">Upcoming Meetings</h2>
+          {upcomingMeetings.length === 0 ? (
+            <div className="flex flex-col items-center py-10">
+              <svg className="w-16 h-16 text-blue-200 mb-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" /></svg>
+              <p className="text-gray-500 text-lg">No upcoming meetings scheduled.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {upcomingMeetings.map((meeting) => (
+                <div key={meeting.id} className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 border border-blue-100 rounded-2xl shadow p-6 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-bold text-xl text-green-700 mb-1">{meeting.chama} Meeting</h3>
+                    <div className="flex items-center text-gray-600 text-sm mb-2">
+                      <span className="mr-3"><span className="font-semibold">Date:</span> {meeting.date}</span>
+                      <span><span className="font-semibold">Time:</span> {meeting.time}</span>
+                    </div>
+                    <div className="text-gray-600 text-sm mb-2">
+                      <span className="font-semibold">Location:</span> {meeting.location}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-700 mt-2 text-sm">Agenda:</h4>
+                      <ul className="list-disc list-inside text-gray-600 text-sm">
+                        {meeting.agenda.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex justify-end">
+                    <button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-5 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all text-sm">View Details</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

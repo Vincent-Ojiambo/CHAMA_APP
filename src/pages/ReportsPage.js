@@ -2,103 +2,102 @@ import React from "react";
 
 function ReportsPage() {
   return (
-    <div className="pt-20 px-6 ml-56">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Financial Reports</h1>
-        <p className="text-gray-600">View and download financial reports</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-100 p-4 pt-20">
+      <div className="max-w-5xl mx-auto space-y-10">
+        {/* Header Section */}
+        <div className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 rounded-2xl shadow-lg p-8 mb-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-lg">Financial Reports</h1>
+          <p className="text-lg text-blue-50">View and download financial reports</p>
+        </div>
 
-      {/* Report Filters */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2">
-              Chama
-            </label>
-            <select className="shadow-sm border border-gray-300 rounded w-full py-2 px-3 text-gray-700">
-              <option>All Chamas</option>
-              <option>Mwanzo Chama</option>
-              <option>Ujenzi Chama</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2">
-              Date Range
-            </label>
-            <select className="shadow-sm border border-gray-300 rounded w-full py-2 px-3 text-gray-700">
-              <option>Last 6 months</option>
-              <option>Last 3 months</option>
-              <option>Last month</option>
-              <option>Custom range</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2">
-              Report Type
-            </label>
-            <select className="shadow-sm border border-gray-300 rounded w-full py-2 px-3 text-gray-700">
-              <option>Contributions</option>
-              <option>Loans</option>
-              <option>Member Activity</option>
-            </select>
-          </div>
-
-          <div className="flex items-end">
-            <button
-              type="button"
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
-            >
-              Apply
-            </button>
+        {/* Report Filters */}
+        <div className="bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-2xl shadow p-8 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+              <label className="block text-gray-700 text-sm font-medium mb-2">Chama</label>
+              <select className="shadow-sm border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-green-300">
+                <option>All Chamas</option>
+                <option>Mwanzo Chama</option>
+                <option>Ujenzi Chama</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-gray-700 text-sm font-medium mb-2">Date Range</label>
+              <select className="shadow-sm border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-green-300">
+                <option>Last 6 months</option>
+                <option>Last 3 months</option>
+                <option>Last month</option>
+                <option>Custom range</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-gray-700 text-sm font-medium mb-2">Report Type</label>
+              <select className="shadow-sm border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-green-300">
+                <option>Contributions</option>
+                <option>Loans</option>
+                <option>Member Activity</option>
+              </select>
+            </div>
+            <div className="flex items-end">
+              <button type="button" className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">Apply</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Chart */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">Contribution Growth</h2>
-
-        <div className="relative h-64">
-          {/* This would be replaced with an actual chart library in a real implementation */}
-          <div className="absolute bottom-0 left-0 right-0 flex justify-between h-48">
-            {["Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"].map(
-              (month, index) => (
-                <div key={index} className="flex flex-col items-center w-1/7">
-                  <div
-                    className="bg-green-500 w-6 rounded-t-md"
-                    style={{ height: `${30 + index * 20}px` }}
-                  ></div>
-                  <span className="text-xs text-gray-600 mt-2">{month}</span>
-                </div>
-              )
-            )}
-          </div>
-
-          {/* Y-axis labels */}
-          <div className="absolute left-0 top-0 bottom-8 flex flex-col justify-between text-right">
-            <span className="text-xs text-gray-600">250K</span>
-            <span className="text-xs text-gray-600">200K</span>
-            <span className="text-xs text-gray-600">150K</span>
-            <span className="text-xs text-gray-600">100K</span>
-            <span className="text-xs text-gray-600">50K</span>
-            <span className="text-xs text-gray-600">0</span>
+        {/* Chart/Card Area */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
+          <h2 className="text-xl font-bold mb-6 text-gray-800">Contribution Growth</h2>
+          <div className="flex flex-col items-center justify-center min-h-[180px]">
+            {/* Placeholder for Chart */}
+            <div className="w-full h-32 bg-gradient-to-r from-green-100 via-blue-100 to-purple-100 rounded-xl flex items-center justify-center text-blue-300 font-bold text-lg">
+              [Chart Placeholder]
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Export Buttons */}
-      <div className="flex justify-end space-x-4">
-        <button className="border-2 border-green-600 text-green-600 font-bold py-2 px-4 rounded hover:bg-green-50">
-          PDF
-        </button>
-        <button className="border-2 border-green-600 text-green-600 font-bold py-2 px-4 rounded hover:bg-green-50">
-          CSV
-        </button>
+        {/* Reports Table */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <h2 className="text-xl font-bold mb-6 text-gray-800">Recent Reports</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Chama</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Report Type</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                  <th className="px-4 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 text-gray-700 font-medium">May 1, 2025</td>
+                  <td className="px-4 py-3 text-blue-700 font-bold">Mwanzo Chama</td>
+                  <td className="px-4 py-3 text-gray-600">Contributions</td>
+                  <td className="px-4 py-3"><span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Ready</span></td>
+                  <td className="px-4 py-3"><button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">Download</button></td>
+                </tr>
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 text-gray-700 font-medium">Apr 1, 2025</td>
+                  <td className="px-4 py-3 text-blue-700 font-bold">Ujenzi Chama</td>
+                  <td className="px-4 py-3 text-gray-600">Loans</td>
+                  <td className="px-4 py-3"><span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">Ready</span></td>
+                  <td className="px-4 py-3"><button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">Download</button></td>
+                </tr>
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 text-gray-700 font-medium">Mar 1, 2025</td>
+                  <td className="px-4 py-3 text-blue-700 font-bold">Mwanzo Chama</td>
+                  <td className="px-4 py-3 text-gray-600">Member Activity</td>
+                  <td className="px-4 py-3"><span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700">Ready</span></td>
+                  <td className="px-4 py-3"><button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">Download</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default ReportsPage; // Add the default export
+export default ReportsPage;
