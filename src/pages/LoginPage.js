@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +64,7 @@ const LoginPage = ({ onGoToRegister, logoUrl = "/logo512.png" }) => {
     setErrors([]);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("https://chamaplus-backend.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
