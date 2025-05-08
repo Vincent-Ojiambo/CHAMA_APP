@@ -10,6 +10,15 @@ function MyChamasPage() {
       totalFunds: "KSH 145,000",
       contribution: "KSH 12,000",
       role: "Member",
+      description: "A community-based savings group focused on supporting members with emergency funds, business loans, and social welfare projects. Members contribute monthly and benefit from group investments and support.",
+      memberList: [
+        { name: "Vincent Ojiambo", role: "Admin", gender: "Male", age: 35, county: "Nairobi", subcounty: "Westlands", village: "Kangemi" },
+        { name: "Grace Mwangi", role: "Treasurer", gender: "Female", age: 42, county: "Kiambu", subcounty: "Ruiru", village: "Gatongora" },
+        { name: "John Otieno", role: "Secretary", gender: "Male", age: 38, county: "Kisumu", subcounty: "Kisumu East", village: "Manyatta" },
+        { name: "Mary Wanjiku", role: "Member", gender: "Female", age: 29, county: "Murang'a", subcounty: "Kandara", village: "Ng'araria" },
+        { name: "Samuel Kiptoo", role: "Member", gender: "Male", age: 31, county: "Uasin Gishu", subcounty: "Soy", village: "Kapseret" },
+        { name: "Esther Njeri", role: "Member", gender: "Female", age: 27, county: "Nyeri", subcounty: "Tetu", village: "Wamagana" },
+      ],
     },
     {
       id: "2",
@@ -19,6 +28,15 @@ function MyChamasPage() {
       totalFunds: "KSH 98,000",
       contribution: "KSH 10,000",
       role: "Treasurer",
+      description: "A chama dedicated to property development and investment. Members pool resources to fund construction projects and real estate ventures, sharing profits and learning together.",
+      memberList: [
+        { name: "Peter Kamau", role: "Admin", gender: "Male", age: 40, county: "Nakuru", subcounty: "Naivasha", village: "Karati" },
+        { name: "Vincent Ojiambo", role: "Treasurer", gender: "Male", age: 35, county: "Nairobi", subcounty: "Westlands", village: "Kangemi" },
+        { name: "Jane Achieng", role: "Secretary", gender: "Female", age: 33, county: "Siaya", subcounty: "Bondo", village: "Nyamonye" },
+        { name: "Lucy Wambui", role: "Member", gender: "Female", age: 45, county: "Nyandarua", subcounty: "Ol Kalou", village: "Kaimbaga" },
+        { name: "James Njoroge", role: "Member", gender: "Male", age: 29, county: "Kiambu", subcounty: "Gatundu South", village: "Kiganjo" },
+        { name: "Pauline Atieno", role: "Member", gender: "Female", age: 28, county: "Kisumu", subcounty: "Kisumu West", village: "Otonglo" },
+      ],
     },
   ]);
 
@@ -37,6 +55,20 @@ function MyChamasPage() {
       totalFunds: "KSH 0",
       contribution: parseFloat(newChamaContribution) || 0,
       role: "Admin",
+      description: newChamaDescription || "No description provided.",
+      memberList: [
+        { name: "You", role: "Admin", gender: "Not specified", age: "Not specified", county: "Not specified", subcounty: "Not specified", village: "Not specified" },
+      ],
+      statistics: {
+        totalContributions: 0,
+        totalWithdrawals: 0,
+        totalInvestments: 0,
+        activeMembers: 1,
+        pendingMembers: 0,
+        totalMeetings: 0,
+        averageAttendance: 100,
+        currentBalance: 0
+      }
     };
     setChamas([...chamas, newChama]);
     setShowCreateForm(false);
@@ -86,7 +118,12 @@ function MyChamasPage() {
                   <span className="inline-block bg-green-50 text-green-700 rounded-full px-2 py-1 text-xs font-semibold">Contribution: {chama.contribution}</span>
                 </div>
               </div>
-              <button className="mt-auto text-white bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 px-4 py-2 rounded-lg font-semibold shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">View</button>
+              <button 
+                className="mt-auto text-white bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 px-4 py-2 rounded-lg font-semibold shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all"
+                onClick={() => window.dispatchEvent(new CustomEvent("navigateTo", { detail: { page: "chama-details", chama } }))}
+              >
+                View
+              </button>
             </div>
           ))}
         </div>

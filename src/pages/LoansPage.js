@@ -119,7 +119,7 @@ function LoansPage() {
 
         {/* Loans Table/Card */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="text-xl font-bold mb-6 text-gray-800">Your Loan Applications</h2>
+          <h2 className="text-xl font-bold mb-6 text-gray-800">Loan History</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
@@ -129,22 +129,27 @@ function LoansPage() {
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Applied Date</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Due Date</th>
-                  <th className="px-4 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                  <th className="px-4 py-2"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
-                {loans.map((loan) => (
+              <tbody>
+                {loans.map((loan, idx) => (
                   <tr key={loan.id} className="hover:bg-blue-50 transition-colors">
                     <td className="px-4 py-3 text-gray-700 font-medium">{loan.chama}</td>
                     <td className="px-4 py-3 text-blue-700 font-bold">{loan.amount}</td>
                     <td className="px-4 py-3 text-gray-600">{loan.appliedDate}</td>
                     <td className="px-4 py-3">
                       <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold
-                        ${loan.status === 'Approved' ? 'bg-green-100 text-green-700' : loan.status === 'Repaid' ? 'bg-blue-100 text-blue-700' : loan.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}`}>{loan.status}</span>
+                        ${loan.status === 'Approved' ? 'bg-green-100 text-green-700' : loan.status === 'Repaid' ? 'bg-blue-100 text-blue-700' : loan.status === 'Rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}`}>{loan.status}</span>
                     </td>
                     <td className="px-4 py-3 text-gray-600">{loan.dueDate}</td>
-                    <td className="px-4 py-3">
-                      <button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">View</button>
+                    <td className="px-4 py-3 text-right">
+                      <button
+                        className="text-blue-600 hover:underline font-semibold"
+                        onClick={() => window.dispatchEvent(new CustomEvent("navigateTo", { detail: { page: "loan-details", loan } }))}
+                      >
+                        View more
+                      </button>
                     </td>
                   </tr>
                 ))}

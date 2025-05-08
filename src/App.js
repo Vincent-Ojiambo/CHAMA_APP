@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "./context/AuthContext";
+import { WebSocketProvider } from "./context/WebSocketContext";
 
 import {
   Home,
@@ -27,6 +28,9 @@ import LoansPage from "./pages/LoansPage";
 import MeetingsPage from "./pages/MeetingsPage";
 import SettingsPage from "./pages/SettingsPage";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ChamaDetailsPage from "./pages/ChamaDetailsPage";
+import LoanDetailsPage from "./pages/LoanDetailsPage";
+import MeetingDetailsPage from "./pages/MeetingDetailsPage";
 
 export default function ChamaPlusApp() {
   const [currentPage, setCurrentPage] = useState("login");
@@ -35,16 +39,64 @@ export default function ChamaPlusApp() {
   const [sidebarOpen, setSidebarOpen] = useState(false); // For mobile sidebar
   const { user, isAuthenticated, isLoading, logout } = useAuth();
 
+  useEffect(() => {
+    if (isAuthenticated && !user) {
+      // If authenticated but no user data, try to fetch it
+      const fetchUserData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/api/auth/verify', {
+            credentials: 'include',
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to verify authentication');
+          }
+
+          const data = await response.json();
+          if (data.success && data.user) {
+            // Update user data in auth context
+            // This would typically be handled by your auth context
+            console.log('User data verified:', data.user);
+          }
+        } catch (error) {
+          console.error('Error verifying user:', error);
+          // Handle error (e.g., redirect to login)
+        }
+      };
+
+      fetchUserData();
+    }
+  }, [isAuthenticated]);
+
+  // Set dashboard as default page when user is authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      setCurrentPage("dashboard");
+    }
+  }, [isAuthenticated]);
+
   // Navigation handler
-  const navigateTo = (page) => {
-    setCurrentPage(page);
+  const navigateTo = (pageOrObj) => {
+    if (typeof pageOrObj === "object" && pageOrObj.page === "chama-details") {
+      setCurrentPage({ page: "chama-details", chama: pageOrObj.chama });
+    } else if (typeof pageOrObj === "object" && pageOrObj.page === "loan-details") {
+      setCurrentPage({ page: "loan-details", loan: pageOrObj.loan });
+    } else {
+      setCurrentPage(pageOrObj);
+    }
   };
 
-  // Listen for quick action navigation events from DashboardPage
+  // Listen for quick action navigation events from DashboardPage and MyChamasPage
   useEffect(() => {
     const handler = (e) => {
       if (e.detail) {
-        setCurrentPage(e.detail);
+        if (typeof e.detail === "object" && e.detail.page === "chama-details") {
+          setCurrentPage({ page: "chama-details", chama: e.detail.chama });
+        } else if (typeof e.detail === "object" && e.detail.page === "loan-details") {
+          setCurrentPage({ page: "loan-details", loan: e.detail.loan });
+        } else {
+          setCurrentPage(e.detail);
+        }
       }
     };
     window.addEventListener("navigateTo", handler);
@@ -72,6 +124,16 @@ export default function ChamaPlusApp() {
       }
     }
 
+    if (typeof currentPage === "object" && currentPage.page === "chama-details") {
+      return <ChamaDetailsPage chama={currentPage.chama} hidePersonal={currentPage.hidePersonal} />;
+    }
+    if (typeof currentPage === "object" && currentPage.page === "loan-details") {
+      return <LoanDetailsPage loan={currentPage.loan} onBack={() => setCurrentPage("loans")} />;
+    }
+    if (typeof currentPage === "object" && currentPage.page === "meeting-details") {
+      return <MeetingDetailsPage meeting={currentPage.meeting} onBack={() => setCurrentPage("meetings")} />;
+    }
+
     switch (currentPage) {
       case "dashboard":
         return <DashboardPage />;
@@ -79,12 +141,12 @@ export default function ChamaPlusApp() {
         return <MyChamasPage />;
       case "contributions":
         return <ContributionsPage />;
-      case "reports":
-        return <ReportsPage />;
       case "loans":
         return <LoansPage />;
       case "meetings":
         return <MeetingsPage />;
+      case "reports":
+        return <ReportsPage />;
       case "settings":
         return <SettingsPage />;
       default:
@@ -97,10 +159,12 @@ export default function ChamaPlusApp() {
   }
 
   return (
-    <div className="font-sans min-h-screen bg-gray-50">
-      {isAuthenticated && (
-        <AppHeader 
-          onMenuClick={() => setSidebarOpen(true)}
+    <WebSocketProvider>
+      <div className="flex h-screen bg-gray-100 overflow-hidden">
+        {isAuthenticated && (
+          <AppHeader 
+            onMenuClick={() => setSidebarOpen(true)}
+          onNavigateToActivityLog={() => navigateTo('activity-log')}
         />
       )}
 
@@ -122,7 +186,7 @@ export default function ChamaPlusApp() {
         </div>
       )}
 
-      <div className="flex min-h-screen">
+      <div className="flex h-full w-full">
         {/* Desktop Sidebar */}
         {isAuthenticated && (
           <Sidebar
@@ -136,11 +200,12 @@ export default function ChamaPlusApp() {
         )}
 
         <main
-          className={`flex-1 overflow-auto transition-all duration-300 ${sidebarMinimized ? 'md:ml-20' : 'md:ml-56'}`}
+          className={`flex-1 h-full w-full overflow-auto transition-all duration-300 ${sidebarMinimized ? 'md:ml-20' : 'md:ml-56'}`}
         >
           {renderPage()}
         </main>
       </div>
     </div>
+    </WebSocketProvider>
   );
 }

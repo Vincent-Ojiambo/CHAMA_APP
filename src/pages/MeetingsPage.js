@@ -60,7 +60,12 @@ function MeetingsPage() {
                     </div>
                   </div>
                   <div className="mt-4 flex justify-end">
-                    <button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-5 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all text-sm">View Details</button>
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent("navigateTo", { detail: { page: "meeting-details", meeting } }))}
+                      className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-5 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all text-sm"
+                    >
+                      View Details
+                    </button>
                   </div>
                 </div>
               ))}

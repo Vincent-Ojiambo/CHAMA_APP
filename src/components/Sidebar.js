@@ -75,7 +75,7 @@ function Sidebar({ currentPage, navigateTo, onLogout, minimized, setMinimized, m
       <div className="mt-auto pb-6 px-6">
         <button
           onClick={onLogout}
-          className={`flex items-center w-full justify-center py-3 text-white font-bold rounded-xl bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 shadow-lg hover:scale-105 hover:from-red-500 hover:to-purple-500 transition-all focus:outline-none focus:ring-2 focus:ring-red-200`}
+          className={`flex items-center w-full justify-center py-3 text-white font-bold rounded-xl bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 shadow-lg hover:from-green-500 hover:to-blue-600 transition-all focus:outline-none focus:ring-2 focus:ring-white`}
         >
           <span className="text-xl">
             <LogOut size={20} />

@@ -64,7 +64,7 @@ const LoginPage = ({ onGoToRegister, logoUrl = "/logo512.png" }) => {
     setErrors([]);
 
     try {
-      const response = await fetch("https://chamaplus-backend.onrender.com/api/auth/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -230,7 +230,7 @@ const LoginPage = ({ onGoToRegister, logoUrl = "/logo512.png" }) => {
 
             <button
               type="submit"
-              className={`w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors ${
+              className={`w-full py-3 px-4 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors ${
                 isSubmitting ? "opacity-75 cursor-not-allowed" : ""
               }`}
               disabled={isSubmitting}

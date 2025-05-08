@@ -56,9 +56,9 @@ function DashboardPage() {
   ];
 
   const chamaStats = [
-    { title: "Mwanzo Chama", totalFunds: "KSH 145,000", members: "12" },
-    { title: "Ujenzi Chama", totalFunds: "KSH 98,000", members: "8" },
-    { title: "Savings Group C", totalFunds: "KSH 62,000", members: "15" },
+    { title: "Mwanzo Chama", totalFunds: "KSH 145,000", members: "12", description: "This is a savings group.", created: "January 1, 2022" },
+    { title: "Ujenzi Chama", totalFunds: "KSH 98,000", members: "8", description: "This is a construction group.", created: "June 15, 2023" },
+    { title: "Savings Group C", totalFunds: "KSH 62,000", members: "15", description: "", created: "N/A" },
   ];
 
   // Navigation for quick actions
@@ -82,8 +82,8 @@ function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-100 p-4 pt-20">
-      <div className="max-w-6xl mx-auto space-y-10">
+    <div className="h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-100">
+      <div className="h-full w-full px-4 sm:px-6 lg:px-8 pt-20 space-y-10">
         {/* Hero Welcome Section */}
         <div className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-center justify-between mb-6 relative overflow-hidden">
           <div className="z-10 flex-1 w-full">
@@ -141,29 +141,29 @@ function DashboardPage() {
               {recentActivities.map((activity, i) => (
                 <li
                   key={i}
-                  className="py-6 flex items-center space-x-4 group hover:bg-white/10 hover:shadow-xl transition-all rounded-xl px-2 relative"
+                  className="py-6 flex items-center space-x-4 group hover:bg-white/20 hover:shadow-2xl transition-all rounded-2xl px-4 relative border-l-4 border-white/30 hover:border-white/60 backdrop-blur-md"
                 >
                   <div className="flex-1 min-w-0 ml-0 flex flex-col sm:flex-row sm:items-center gap-2">
                     <div className="font-semibold text-white flex items-center gap-3">
                       {/* Icon for each activity type */}
-                      {activity.type === 'Contribution Received' && <Coins className="text-blue-100 w-6 h-6" />}
-                      {activity.type === 'Loan Approved' && <DollarSign className="text-green-100 w-6 h-6" />}
-                      {activity.type === 'Meeting Scheduled' && <Calendar className="text-purple-100 w-6 h-6" />}
-                      {activity.type === 'New Member Joined' && <Users className="text-yellow-100 w-6 h-6" />}
-                      <span>{activity.type}</span>
+                      {activity.type === 'Contribution Received' && <Coins className="text-blue-200 bg-blue-500/30 rounded-full p-1 w-8 h-8 shadow" />}
+                      {activity.type === 'Loan Approved' && <DollarSign className="text-green-200 bg-green-500/30 rounded-full p-1 w-8 h-8 shadow" />}
+                      {activity.type === 'Meeting Scheduled' && <Calendar className="text-purple-200 bg-purple-500/30 rounded-full p-1 w-8 h-8 shadow" />}
+                      {activity.type === 'New Member Joined' && <Users className="text-yellow-200 bg-yellow-500/30 rounded-full p-1 w-8 h-8 shadow" />}
+                      <span className="drop-shadow-lg">{activity.type}</span>
                       {/* Optional badge for new activities */}
                       {i === 0 && (
-                        <span className="ml-2 bg-white/80 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full animate-bounce">New</span>
+                        <span className="ml-2 bg-white/90 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full animate-bounce shadow">New</span>
                       )}
                     </div>
-                    <div className="text-blue-50 text-sm">{activity.details}</div>
+                    <div className="text-blue-50 text-sm italic font-light">{activity.details}</div>
                   </div>
-                  <div className="text-xs text-blue-200 whitespace-nowrap font-mono ml-2">{activity.time}</div>
+                  <div className="text-xs text-blue-100 whitespace-nowrap font-mono ml-2 bg-white/20 px-2 py-1 rounded-full shadow">{activity.time}</div>
                 </li>
               ))}
             </ul>
             <div className="flex justify-center mt-8">
-              <button className="bg-white/30 hover:bg-white/50 text-blue-700 font-bold px-8 py-3 rounded-full shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-white/60 border-2 border-white/40 backdrop-blur-md text-lg tracking-wide flex items-center gap-2">
+              <button className="bg-white/40 hover:bg-white/70 text-blue-800 font-bold px-8 py-3 rounded-full shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-white/60 border-2 border-white/40 backdrop-blur-lg text-lg tracking-wide flex items-center gap-2">
                 <svg xmlns='http://www.w3.org/2000/svg' className='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 17l4 4 4-4m0-5V3m0 0H4m16 0h-4' /></svg>
                 View All Activities
               </button>
@@ -180,9 +180,35 @@ function DashboardPage() {
                 <h3 className="font-semibold text-lg text-gray-800 mb-2 flex items-center gap-2">
                   <Briefcase className="text-blue-400" /> {chama.title}
                 </h3>
+                {/* Match description and date with user's MyChamasPage data if available */}
+                {(() => {
+                  const myChamas = JSON.parse(localStorage.getItem('myChamas') || '[]');
+                  const match = myChamas.find(c => c.name === chama.title);
+                  return (
+                    <>
+                      <p className="text-gray-600 text-xs mb-1">Description: <span className="font-normal">{(match && match.description) || chama.description || "No description provided."}</span></p>
+                      <p className="text-gray-500 text-xs mb-2">Date of Creation: {(match && match.created) || chama.created || "N/A"}</p>
+                    </>
+                  );
+                })()}
                 <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">Members: {chama.members}</span>
                 <p className="text-gray-600 text-sm mb-4">Total Funds: <span className="font-bold text-blue-700">{chama.totalFunds}</span></p>
-                <button className="mt-auto text-white bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 px-4 py-2 rounded-lg font-semibold shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all">View Details</button>
+                <button 
+                  className="mt-auto text-white bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 px-4 py-2 rounded-lg font-semibold shadow focus:outline-none focus:ring-2 focus:ring-green-300 transition-all"
+                  onClick={() => {
+                    // Find chama details from MyChamasPage data (simulate real data fetch)
+                    const myChamas = JSON.parse(localStorage.getItem('myChamas') || '[]');
+                    const chamaDetails = myChamas.find(c => c.name === chama.title);
+                    if (chamaDetails) {
+                      window.dispatchEvent(new CustomEvent("navigateTo", { detail: { page: "chama-details", chama: chamaDetails, hidePersonal: false } }));
+                    } else {
+                      // Show only chama info, hide personal info
+                      window.dispatchEvent(new CustomEvent("navigateTo", { detail: { page: "chama-details", chama: { ...chama, memberList: [] }, hidePersonal: true } }));
+                    }
+                  }}
+                >
+                  View Details
+                </button>
               </div>
             ))}
           </div>
